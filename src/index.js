@@ -11,7 +11,7 @@ if (module.hot) {
       console.error(error);
     }
   });
-  console.info('✅  Server-side HMR Enabled!');
+  console.info('🌀  Server-side HMR Enabled!');
 }
 
 const port = process.env.PORT || 3000;
@@ -23,5 +23,5 @@ export default express()
       console.error(err);
       return;
     }
-    console.log(`> Started on port ${port}`);
+    console.log(`🚀  Started on http://localhost:${port}`);
   });

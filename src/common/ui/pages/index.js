@@ -1,6 +1,9 @@
 import Home from './home';
-import About from './About';
+import About from './about';
+import Counter from './counter';
 
 export {
-  Home
+  Home,
+  About,
+  Counter
 }

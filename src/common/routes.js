@@ -22,7 +22,7 @@ export default [
     path: '/counter',
     exact: true,
     component: asyncComponent({
-      loader: () => import('./views/pages/counter'),
+      loader: () => import('./ui/pages/counter'),
       Placeholder: () => <div>...LOADING COUNTER...</div>,
     })
   }

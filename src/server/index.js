@@ -3,7 +3,7 @@ import React from 'react';
 import express from 'express';
 import { render } from '@jaredpalmer/after';
 import { renderToString } from 'react-dom/server';
-import Home from '../common/views/pages/home/Home';
+import {Home} from '../common/ui/pages';
 import routes from '../common/routes';
 import MyDocument from './Document';
 import { Provider } from 'react-redux';
@@ -43,8 +43,8 @@ server
         serverState,
       };
     };
- 
-      
+
+
       const html = await render({
         req,
         res,
