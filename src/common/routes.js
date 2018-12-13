@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { asyncComponent } from '@jaredpalmer/after';
 
 export default [
@@ -7,7 +6,7 @@ export default [
     path: '/',
     exact: true,
     component: asyncComponent({
-      loader: () => import('./views/pages/home/Home'), // required
+      loader: () => import('./ui/pages/home'), // required
       Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
     }),
   },
@@ -15,7 +14,7 @@ export default [
     path: '/about',
     exact: true,
     component: asyncComponent({
-      loader: () => import('./views/pages/about'), // required
+      loader: () => import('./ui/pages/about'), // required
       Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
     }),
   },
