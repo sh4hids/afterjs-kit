@@ -4,9 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux';
 import { ensureReady, After } from '@jaredpalmer/after';
-import theme from '../common/theme'
-import routes from '../common/routes';
-import configureStore from '../common/store/configureStore';
+import theme from '../app/theme'
+import routes from '../app/routes';
+import configureStore from '../app/store/configureStore';
 
 
 const store = configureStore(window.__PRELOADED_STATE__);

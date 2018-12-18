@@ -3,11 +3,11 @@ import React from 'react';
 import express from 'express';
 import { render } from '@jaredpalmer/after';
 import { renderToString } from 'react-dom/server';
-import {Home} from '../common/ui/pages';
-import routes from '../common/routes';
+import {Home} from '../app/ui/pages';
+import routes from '../app/routes';
 import MyDocument from './Document';
 import { Provider } from 'react-redux';
-import configureStore from '../common/store/configureStore';
+import configureStore from '../app/store/configureStore';
 
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
