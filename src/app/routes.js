@@ -18,12 +18,4 @@ export default [
       Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
     }),
   },
-  {
-    path: '/counter',
-    exact: true,
-    component: asyncComponent({
-      loader: () => import('./ui/pages/counter'),
-      Placeholder: () => <div>...LOADING COUNTER...</div>,
-    })
-  }
 ];

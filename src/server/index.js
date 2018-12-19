@@ -3,12 +3,11 @@ import React from 'react';
 import express from 'express';
 import { render } from '@jaredpalmer/after';
 import { renderToString } from 'react-dom/server';
-import {Home} from '../app/ui/pages';
+import { Home } from '../app/ui/pages';
 import routes from '../app/routes';
 import MyDocument from './Document';
 import { Provider } from 'react-redux';
-import configureStore from '../app/store/configureStore';
-
+import configureStore from '../app/state/store';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -18,32 +17,28 @@ server
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', async (req, res) => {
     try {
+      // Read the counter from the request, if provided
+      const params = qs.parse(req.query);
 
-    // Read the counter from the request, if provided
-    const params = qs.parse(req.query);
-    const counter = parseInt(params.counter, 10) || 0;
+      // Compile initial state
+      const preloadedState = {};
 
-    // Compile initial state
-    const preloadedState = { counter };
+      // Create a new Redux store instance
+      const store = configureStore(preloadedState);
 
-    // Create a new Redux store instance
-    const store = configureStore(preloadedState);
+      // Grab the initial state from our Redux store
+      const serverState = store.getState();
 
-    // Grab the initial state from our Redux store
-    const serverState = store.getState();
-
-
-    const customRenderer = node => {
-      const Home = <Provider store={store}>{node}</Provider>;
-      return {
-        html: renderToString(Home),
-        // Anything else you add here will be made available
-        // within document's this.props
-        // e.g a redux store...
-        serverState,
+      const customRenderer = node => {
+        const Home = <Provider store={store}>{node}</Provider>;
+        return {
+          html: renderToString(Home),
+          // Anything else you add here will be made available
+          // within document's this.props
+          // e.g a redux store...
+          serverState,
+        };
       };
-    };
-
 
       const html = await render({
         req,
