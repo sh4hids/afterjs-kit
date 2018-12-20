@@ -3,9 +3,14 @@ import { NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Title, Text } from '../kits/typography';
 import { Button } from '../kits/core';
+import { CenteredSingleCol } from '../layouts';
+import { withFormik } from 'formik';
+import Yup from 'yup';
 
-class Home extends Component {
+class SignUp extends Component {
   render() {
+    const { values, handleChange } = this.props;
+    console.log(values);
     return (
       <Fragment>
         <Helmet>
@@ -18,29 +23,41 @@ class Home extends Component {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
         </div>
-        <Title>This is the home page</Title>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
-          earum aspernatur quisquam perferendis eius modi soluta tempore fuga
-          incidunt, porro, hic explicabo rerum quia alias consequuntur similique
-          ipsam dolores, quo.
-        </Text>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
-          earum aspernatur quisquam perferendis eius modi soluta tempore fuga
-          incidunt, porro, hic explicabo rerum quia alias consequuntur similique
-          ipsam dolores, quo.
-        </Text>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
-          earum aspernatur quisquam perferendis eius modi soluta tempore fuga
-          incidunt, porro, hic explicabo rerum quia alias consequuntur similique
-          ipsam dolores, quo.
-        </Text>
-        <Button p={16}>Click</Button>
+        <CenteredSingleCol width={960}>
+          <Title>Welcome to afterjs todo app</Title>
+          <form>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={values.email}
+              onChange={handleChange}
+            />
+            <br />
+            <br />
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+            />
+            <br />
+            <br />
+            <Button p={16} type="submit">
+              Log in
+            </Button>
+          </form>
+        </CenteredSingleCol>
       </Fragment>
     );
   }
 }
+
+const Home = withFormik({
+  mapPropsToValues() {
+    return {
+      email: 'test text',
+    };
+  },
+})(SignUp);
 
 export default Home;

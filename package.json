@@ -12,6 +12,7 @@
     "@jaredpalmer/after": "latest",
     "@rebass/grid": "^6.0.0-7",
     "express": "^4.16.2",
+    "formik": "^1.4.1",
     "razzle": "^2.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -22,7 +23,8 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.1.1",
-    "styled-system": "^3.1.11"
+    "styled-system": "^3.1.11",
+    "yup": "^0.26.6"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.9.4",
