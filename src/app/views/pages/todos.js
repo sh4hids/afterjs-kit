@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const Todos = props => {
-  return <p>Todo</p>;
+const Todos = ({ todos }) => {
+  return (
+    <Fragment>
+      {todos.map(todo => (
+        <p key={todo._id}>{todo.title}</p>
+      ))}
+    </Fragment>
+  );
 };
 
 export default Todos;

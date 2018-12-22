@@ -2,7 +2,9 @@ import * as types from './types';
 
 const initialState = {
   isAuthenticated: true,
-  redirectAfterLogin: '/',
+  accessToken: '',
+  userId: '5c1e62931ed84858b66c1937',
+  redirectAfterLogin: '/todos',
 };
 
 const authReducers = function(state = initialState, { type, payload }) {

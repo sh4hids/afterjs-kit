@@ -2,6 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 
 class About extends Component {
+  static async getInitialProps({ req, res, match }) {
+    console.log('Hello');
+  }
+
   render() {
     return (
       <Fragment>

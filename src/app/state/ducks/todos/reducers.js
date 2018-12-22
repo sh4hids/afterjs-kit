@@ -1,11 +1,23 @@
 import * as types from './types';
 
-const initialState = {};
+const initialState = {
+  todo: {},
+  todoList: [],
+};
 
 const todosReducers = function(state = initialState, { type, payload }) {
   switch (type) {
     case types.ADD_TASK:
-      return state;
+      return {
+        ...state,
+        todo: payload,
+        todoList: [...state.todoList, payload],
+      };
+    case types.GET_ALL_TASKS_COMPLETED:
+      return {
+        ...state,
+        todoList: [...state.todoList, ...payload],
+      };
     default:
       return state;
   }

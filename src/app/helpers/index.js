@@ -1,3 +1,4 @@
 import withAuthentication from './authentication';
+import apiService from './api-service';
 
-export { withAuthentication };
+export { withAuthentication, apiService };

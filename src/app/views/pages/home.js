@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import * as Yup from 'yup';
+import { withFormik, Form, Field } from 'formik';
 import { Title, Text } from '../kits/typography';
 import { Button } from '../kits/core';
 import { CenteredSingleCol } from '../layouts';
-import { withFormik, Form, Field } from 'formik';
-import * as Yup from 'yup';
 
 class SignUp extends Component {
   render() {
@@ -50,7 +50,7 @@ class SignUp extends Component {
 const Home = withFormik({
   mapPropsToValues() {
     return {
-      email: 'test text',
+      email: '',
       password: '',
     };
   },
