@@ -3,7 +3,7 @@ import React from 'react';
 import express from 'express';
 import { render } from '@jaredpalmer/after';
 import { renderToString } from 'react-dom/server';
-import { Home } from '../app/ui/pages';
+import { Home } from '../app/views/pages';
 import routes from '../app/routes';
 import MyDocument from './Document';
 import { Provider } from 'react-redux';
