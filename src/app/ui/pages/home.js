@@ -4,13 +4,12 @@ import { Helmet } from 'react-helmet';
 import { Title, Text } from '../kits/typography';
 import { Button } from '../kits/core';
 import { CenteredSingleCol } from '../layouts';
-import { withFormik } from 'formik';
-import Yup from 'yup';
+import { withFormik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 
 class SignUp extends Component {
   render() {
-    const { values, handleChange } = this.props;
-    console.log(values);
+    const { errors, touched } = this.props;
     return (
       <Fragment>
         <Helmet>
@@ -25,27 +24,23 @@ class SignUp extends Component {
         </div>
         <CenteredSingleCol width={960}>
           <Title>Welcome to afterjs todo app</Title>
-          <form>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={values.email}
-              onChange={handleChange}
-            />
+          <Form>
+            <div>
+              {touched.email && errors.email && <Text>{errors.email}</Text>}
+              <Field type="email" name="email" placeholder="Email" />
+            </div>
             <br />
-            <br />
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-            />
-            <br />
+            <div>
+              {touched.password && errors.password && (
+                <Text>{errors.password}</Text>
+              )}
+              <Field type="password" name="password" placeholder="Password" />
+            </div>
             <br />
             <Button p={16} type="submit">
               Log in
             </Button>
-          </form>
+          </Form>
         </CenteredSingleCol>
       </Fragment>
     );
@@ -56,7 +51,19 @@ const Home = withFormik({
   mapPropsToValues() {
     return {
       email: 'test text',
+      password: '',
     };
+  },
+  validationSchema: Yup.object().shape({
+    email: Yup.string()
+      .email()
+      .required(),
+    password: Yup.string()
+      .min(6)
+      .required(),
+  }),
+  handleSubmit(values) {
+    console.log(values);
   },
 })(SignUp);
 
