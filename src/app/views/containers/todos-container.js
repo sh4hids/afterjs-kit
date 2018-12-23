@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { todoActions } from '../../state/ducks/todos';
 import { Todos } from '../pages';
 
 class TodosContainer extends Component {
-  static async getInitialProps({ req, res, match }) {
-    console.log('Hello');
-    // const { fetchTodoList, userId } = this.props;
-    // fetchTodoList(userId);
+  componentDidMount() {
+    const { fetchTodoList, userId } = this.props;
+    fetchTodoList(userId);
   }
 
   render() {
@@ -23,11 +23,10 @@ const mapStateToProps = ({ auth, todos }) => {
   };
 };
 
-const mapActionsToProps = {
-  fetchTodoList: todoActions.fetchTodoList,
-};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(todoActions, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapActionsToProps
+  mapDispatchToProps
 )(TodosContainer);
