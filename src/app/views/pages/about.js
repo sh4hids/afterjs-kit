@@ -1,13 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { todoActions } from '../../state/ducks/todos';
+import Todos from './todos';
 
 class About extends Component {
   static async getInitialProps({ store }) {
-    console.log(store.getState());
+    // console.log(store.getState());
+    const state = store.getState();
+    await store.dispatch(todoActions.fetchTodoList(state.auth.userId));
+    return store.getState().todos;
   }
 
   render() {
+    const { todoList } = this.props;
+    console.log(this.props);
     return (
       <Fragment>
         <div>
@@ -21,6 +27,7 @@ class About extends Component {
           incidunt, porro, hic explicabo rerum quia alias consequuntur similique
           ipsam dolores, quo.
         </p>
+        {todoList && <Todos todos={todoList} />}
       </Fragment>
     );
   }

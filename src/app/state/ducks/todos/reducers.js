@@ -14,6 +14,7 @@ const todosReducers = function(state = initialState, { type, payload }) {
         todoList: [...state.todoList, payload],
       };
     case types.GET_ALL_TASKS_COMPLETED:
+      console.log('Hello');
       return {
         ...state,
         todoList: [...state.todoList, ...payload],

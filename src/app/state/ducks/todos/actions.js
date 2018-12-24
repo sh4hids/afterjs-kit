@@ -10,12 +10,14 @@ export const fetchTodoById = permalink => ({
   },
 });
 
-export const fetchTodoList = userId => ({
-  type: types.GET_ALL_TASKS,
-  meta: {
-    async: true,
-    blocking: true,
-    path: `users/${userId}/todos`,
-    method: 'GET',
-  },
-});
+export const fetchTodoList = userId => {
+  return {
+    type: types.GET_ALL_TASKS,
+    meta: {
+      async: true,
+      blocking: true,
+      path: `users/${userId}/todos`,
+      method: 'GET',
+    },
+  };
+};
