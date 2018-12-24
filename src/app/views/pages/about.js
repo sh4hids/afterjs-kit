@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import { todoActions } from '../../state/ducks/todos';
 
 class About extends Component {
-  static async getInitialProps({ req, res, match }) {
-    console.log('Hello');
+  static async getInitialProps({ store }) {
+    console.log(store.getState());
   }
 
   render() {

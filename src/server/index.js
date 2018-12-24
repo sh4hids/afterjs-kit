@@ -50,6 +50,7 @@ server
         // Anything else you add here will be made available
         // within getInitialProps(ctx)
         // e.g a redux store...
+        store: store,
       });
       res.send(html);
     } catch (error) {
