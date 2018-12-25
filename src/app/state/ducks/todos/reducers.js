@@ -17,7 +17,7 @@ const todosReducers = function(state = initialState, { type, payload }) {
       console.log('Hello');
       return {
         ...state,
-        todoList: [...state.todoList, ...payload],
+        todoList: [...payload],
       };
     default:
       return state;

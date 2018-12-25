@@ -3,7 +3,7 @@ import * as types from './types';
 const initialState = {
   isAuthenticated: true,
   accessToken: '',
-  userId: '5c07a44e1ec68b10b771b7c5',
+  userId: '5c1e62931ed84858b66c1937',
   redirectAfterLogin: '/todos',
 };
 

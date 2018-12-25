@@ -19,6 +19,7 @@ class About extends Component {
         <div>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
+          <NavLink to="/todos">About</NavLink>
         </div>
         <h1>This is the about page</h1>
         <p>

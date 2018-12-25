@@ -22,11 +22,9 @@ export default [
   {
     path: '/todos',
     exact: true,
-    component: withAuthentication(
-      asyncComponent({
-        loader: () => import('./views/containers/todos-container'), // required
-        Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
-      })
-    ),
+    component: asyncComponent({
+      loader: () => import('./views/containers/todos-container'), // required
+      Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
+    }),
   },
 ];
