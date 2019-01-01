@@ -9,11 +9,13 @@ const initialState = {
 
 const authReducers = function(state = initialState, { type, payload }) {
   switch (type) {
-    case types.LOGIN:
+    case types.LOGIN_COMPLETED:
+      console.log(payload);
       return { ...state, isAuthenticated: true, ...payload };
     case types.LOGOUT:
       return { ...state, isAuthenticated: false, user: {} };
     default:
+      console.log(type);
       return state;
   }
 };

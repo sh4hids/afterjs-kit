@@ -2,10 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { withFormik, Form, Field } from 'formik';
 import { Title, Text } from '../kits/typography';
 import { Button } from '../kits/core';
 import { CenteredSingleCol } from '../layouts';
+import { authActions } from '../../state/ducks/auth';
 
 class SignUp extends Component {
   render() {
@@ -63,9 +66,10 @@ const Home = withFormik({
       .min(6)
       .required(),
   }),
-  handleSubmit(values) {
-    console.log(values);
+  handleSubmit(values, { props }) {
+    const { dispatch } = props;
+    dispatch(authActions.login(values));
   },
 })(SignUp);
 
-export default Home;
+export default connect()(Home);

@@ -1,11 +1,15 @@
 import * as types from './types';
+import config from '../../../config';
+
+const env = process.env.NODE_ENV || 'development';
+const apiUrl = config[env].api;
 
 export const fetchTodoById = permalink => ({
   type: types.GET_TASK_BY_ID,
   meta: {
     async: true,
     blocking: true,
-    path: `todos/${permalink}`,
+    path: `${apiUrl}/todos/${permalink}`,
     method: 'GET',
   },
 });
@@ -16,7 +20,7 @@ export const fetchTodoList = userId => {
     meta: {
       async: true,
       blocking: true,
-      path: `users/${userId}/todos`,
+      path: `${apiUrl}/users/${userId}/todos`,
       method: 'GET',
     },
   };

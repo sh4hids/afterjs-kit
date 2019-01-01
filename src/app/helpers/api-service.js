@@ -3,7 +3,7 @@ import config from '../config';
 
 const env = process.env.NODE_ENV || 'development';
 
-const baseUrl = `${config[env].server}${config[env].api}`;
+const baseUrl = `${config[env].server}`;
 
 const apiService = () => next => action => {
   const result = next(action);
