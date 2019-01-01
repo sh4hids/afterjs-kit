@@ -1,18 +1,18 @@
 import * as types from './types';
 
 const initialState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   accessToken: '',
-  userId: '5c07a44e1ec68b10b771b7c5',
+  user: {},
   redirectAfterLogin: '/todos',
 };
 
 const authReducers = function(state = initialState, { type, payload }) {
   switch (type) {
     case types.LOGIN:
-      return { ...state, isAuthenticated: true };
+      return { ...state, isAuthenticated: true, ...payload };
     case types.LOGOUT:
-      return { ...state, isAuthenticated: false };
+      return { ...state, isAuthenticated: false, user: {} };
     default:
       return state;
   }
