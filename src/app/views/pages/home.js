@@ -21,6 +21,7 @@ class SignUp extends Component {
         <div>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
+          <NavLink to="/todos">About</NavLink>
         </div>
         <CenteredSingleCol width={960}>
           <Title>Welcome to afterjs todo app</Title>

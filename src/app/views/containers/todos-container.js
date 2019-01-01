@@ -5,6 +5,12 @@ import { todoActions } from '../../state/ducks/todos';
 import { Todos } from '../pages';
 
 class TodosContainer extends Component {
+  static async getInitialProps({ store }) {
+    const state = store.getState();
+    await store.dispatch(todoActions.fetchTodoList(state.auth.userId));
+    return store.getState().todos;
+  }
+
   componentDidMount() {
     const { fetchTodoList, userId } = this.props;
     fetchTodoList(userId);
