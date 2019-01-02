@@ -28,6 +28,7 @@ const apiService = () => next => action => {
 export default apiService;
 
 function handleErrors(err, action, next) {
+  console.log(err);
   next({
     type: `${action.type}_failed`,
     payload: err,

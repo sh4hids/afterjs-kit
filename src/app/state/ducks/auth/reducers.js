@@ -12,10 +12,12 @@ const authReducers = function(state = initialState, { type, payload }) {
     case types.LOGIN_COMPLETED:
       console.log(payload);
       return { ...state, isAuthenticated: true, ...payload };
+    case types.LOGIN_FAILED:
+      console.log(payload);
+      return { ...state, isAuthenticated: false };
     case types.LOGOUT:
       return { ...state, isAuthenticated: false, user: {} };
     default:
-      console.log(type);
       return state;
   }
 };
