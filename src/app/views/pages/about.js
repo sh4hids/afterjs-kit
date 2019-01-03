@@ -5,15 +5,13 @@ import Todos from './todos';
 
 class About extends Component {
   static async getInitialProps({ store }) {
-    // console.log(store.getState());
     const state = store.getState();
-    await store.dispatch(todoActions.fetchTodoList(state.auth.userId));
+    await store.dispatch(todoActions.fetchTodoList(state.auth.user._id));
     return store.getState().todos;
   }
 
   render() {
     const { todoList } = this.props;
-    console.log(this.props);
     return (
       <Fragment>
         <div>

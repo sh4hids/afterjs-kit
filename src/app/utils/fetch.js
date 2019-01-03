@@ -16,7 +16,7 @@ function parseStatus(status, res) {
     if (status >= 200 && status < 300) {
       res.then(response => resolve(response));
     } else {
-      res.then(response => reject({ status }));
+      res.then(response => reject({ status, message: response.message }));
     }
   });
 }

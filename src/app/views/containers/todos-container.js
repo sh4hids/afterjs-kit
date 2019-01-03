@@ -23,7 +23,7 @@ class TodosContainer extends Component {
 
 const mapStateToProps = ({ auth, todos }) => {
   return {
-    userId: auth.userId,
+    userId: auth.user._id,
     todoList: todos.todoList,
     todo: todos.todo,
   };

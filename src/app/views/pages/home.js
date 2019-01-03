@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
 import { bindActionCreators } from 'redux';
@@ -12,40 +12,50 @@ import { authActions } from '../../state/ducks/auth';
 
 class SignUp extends Component {
   render() {
-    const { errors, touched } = this.props;
+    const { errors, touched, isAuthenticated, user } = this.props;
     return (
       <Fragment>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <meta name="description" content="SSR React application" />
-          <title>Welcome To After.js</title>
-          <link rel="canonical" href="http://mysite.com/example" />
-        </Helmet>
-        <div>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/todos">About</NavLink>
-        </div>
-        <CenteredSingleCol width={960}>
-          <Title>Welcome to afterjs todo app</Title>
-          <Form>
+        {isAuthenticated ? (
+          <Redirect to="/todos" />
+        ) : (
+          <Fragment>
+            <Helmet>
+              <meta charSet="utf-8" />
+              <meta name="description" content="SSR React application" />
+              <title>Welcome To After.js</title>
+              <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div>
-              {touched.email && errors.email && <Text>{errors.email}</Text>}
-              <Field type="email" name="email" placeholder="Email" />
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/about">About</NavLink>
+              <NavLink to="/todos">About</NavLink>
             </div>
-            <br />
-            <div>
-              {touched.password && errors.password && (
-                <Text>{errors.password}</Text>
-              )}
-              <Field type="password" name="password" placeholder="Password" />
-            </div>
-            <br />
-            <Button p={16} type="submit">
-              Log in
-            </Button>
-          </Form>
-        </CenteredSingleCol>
+            <CenteredSingleCol width={960}>
+              <Title>Welcome to afterjs todo app</Title>
+              <Form>
+                <div>
+                  {touched.email && errors.email && <Text>{errors.email}</Text>}
+                  <Field type="email" name="email" placeholder="Email" />
+                </div>
+                <br />
+                <div>
+                  {touched.password && errors.password && (
+                    <Text>{errors.password}</Text>
+                  )}
+                  <Field
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                  />
+                </div>
+                <br />
+                <Button p={16} type="submit">
+                  Log in
+                </Button>
+              </Form>
+            </CenteredSingleCol>
+          </Fragment>
+        )}
       </Fragment>
     );
   }
@@ -72,4 +82,14 @@ const Home = withFormik({
   },
 })(SignUp);
 
-export default connect()(Home);
+const mapStateToProps = ({ auth }) => {
+  return {
+    isAuthenticated: auth.isAuthenticated,
+    user: auth.user,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Home);
