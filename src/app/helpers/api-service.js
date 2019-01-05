@@ -1,8 +1,10 @@
 import { fetch } from '../utils';
 import config from '../config';
+import AuthService from './auth-service';
+
+const Auth = new AuthService();
 
 const env = process.env.NODE_ENV || 'development';
-
 const baseUrl = `${config[env].server}`;
 
 const apiService = () => next => action => {
@@ -11,7 +13,7 @@ const apiService = () => next => action => {
     return result;
   }
 
-  const { path, method = 'GET', body } = action.meta;
+  const { path, method = 'GET', body, accessToken } = action.meta;
 
   if (!path) {
     throw new Error(`'path' not specified for async action ${action.type}`);
@@ -19,7 +21,7 @@ const apiService = () => next => action => {
 
   const url = `${baseUrl}${path}`;
 
-  return fetch(url, method, body).then(
+  return fetch(url, method, body, accessToken).then(
     res => handleResponse(res, action, next),
     err => handleErrors(err, action, next)
   );
@@ -38,6 +40,13 @@ function handleErrors(err, action, next) {
 }
 
 function handleResponse(res, action, next) {
+  if (action.type === 'auth/login') {
+    const { user, token } = res.data;
+    Auth.setToken(token);
+    Auth.setUser(user);
+  } else if (action.type === 'auth/logout') {
+    Auth.removeToken();
+  }
   next({
     type: `${action.type}_completed`,
     payload: res.data,

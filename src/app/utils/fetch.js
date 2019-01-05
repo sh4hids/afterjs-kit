@@ -1,9 +1,9 @@
 import isomorphicFetch from 'isomorphic-fetch';
 
-const fetch = async (url, method, body) => {
+const fetch = async (url, method, body, accessToken) => {
   const options = {
     method,
-    headers: requestHeaders(),
+    headers: requestHeaders(accessToken),
     body: method !== 'GET' ? JSON.stringify(body) : null,
   };
   const res = await isomorphicFetch(url, options);
@@ -21,10 +21,11 @@ function parseStatus(status, res) {
   });
 }
 
-function requestHeaders() {
+function requestHeaders(token) {
   return {
     Accept: 'application/json',
     'Content-Type': 'application/json',
+    Authorization: token ? `Bearer ${token}` : '',
   };
 }
 

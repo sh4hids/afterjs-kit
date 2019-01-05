@@ -1,8 +1,4 @@
 import * as types from './types';
-import config from '../../../config';
-
-const env = process.env.NODE_ENV || 'development';
-const apiUrl = config[env].api;
 
 export const login = ({ email, password }) => ({
   type: types.LOGIN,
@@ -15,8 +11,21 @@ export const login = ({ email, password }) => ({
   },
 });
 
-export const logout = () => ({
+export const logout = accessToken => ({
   type: types.LOGOUT,
+  meta: {
+    async: true,
+    blocking: true,
+    path: `auth/logout`,
+    method: 'POST',
+    body: {},
+    accessToken,
+  },
+});
+
+export const setLoggedInUser = data => ({
+  type: types.SET_LOGGED_IN_USER,
+  payload: data,
 });
 
 export const initializeAuth = () => ({

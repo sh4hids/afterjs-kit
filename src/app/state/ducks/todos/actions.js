@@ -14,7 +14,8 @@ export const fetchTodoById = permalink => ({
   },
 });
 
-export const fetchTodoList = userId => {
+export const fetchTodoList = ({ userId, accessToken }) => {
+  console.log(accessToken);
   return {
     type: types.GET_ALL_TASKS,
     meta: {
@@ -22,6 +23,7 @@ export const fetchTodoList = userId => {
       blocking: true,
       path: `${apiUrl}/users/${userId}/todos`,
       method: 'GET',
+      accessToken,
     },
   };
 };

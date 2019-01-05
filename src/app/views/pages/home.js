@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withFormik, Form, Field } from 'formik';
 import { Title, Text } from '../kits/typography';
@@ -12,11 +11,11 @@ import { authActions } from '../../state/ducks/auth';
 
 class SignUp extends Component {
   render() {
-    const { errors, touched, isAuthenticated, user } = this.props;
+    const { errors, touched, isAuthenticated } = this.props;
     return (
       <Fragment>
         {isAuthenticated ? (
-          <Redirect to="/todos" />
+          <Redirect to="/about" />
         ) : (
           <Fragment>
             <Helmet>
@@ -86,6 +85,7 @@ const mapStateToProps = ({ auth }) => {
   return {
     isAuthenticated: auth.isAuthenticated,
     user: auth.user,
+    accessToken: auth.accessToken,
   };
 };
 

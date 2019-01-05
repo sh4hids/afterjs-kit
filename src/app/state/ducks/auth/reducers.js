@@ -10,8 +10,20 @@ const initialState = {
 
 const authReducers = function(state = initialState, { type, payload }) {
   switch (type) {
+    case types.SET_LOGGED_IN_USER:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: payload.user,
+        accessToken: payload.token,
+      };
     case types.LOGIN_COMPLETED:
-      return { ...state, isAuthenticated: true, ...payload };
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: payload.user,
+        accessToken: payload.token,
+      };
     case types.LOGIN_FAILED:
       return {
         ...state,

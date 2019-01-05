@@ -4,14 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 export default function withAuthentication(WrappedComponent) {
-  // const WithAuthentication = props => {
-  //   if (!props.isAuthenticated) {
-  //     return <Redirect to="/" />;
-  //   }
-  //
-  //   return <WrappedComponent {...props} />;
-  // };
-
   class WithAuthentication extends Component {
     static async getInitialProps(ctx) {
       const pageProps =
@@ -23,6 +15,7 @@ export default function withAuthentication(WrappedComponent) {
 
     render() {
       const { isAuthenticated } = this.props;
+
       return (
         <Fragment>
           {isAuthenticated ? (
@@ -40,8 +33,8 @@ export default function withAuthentication(WrappedComponent) {
     isAuthenticated: bool.isRequired,
   };
 
-  const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
+  const mapStateToProps = ({ auth }) => ({
+    isAuthenticated: auth.isAuthenticated,
   });
 
   return connect(mapStateToProps)(WithAuthentication);
