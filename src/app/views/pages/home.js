@@ -10,6 +10,10 @@ import { CenteredSingleCol } from '../layouts';
 import { authActions } from '../../state/ducks/auth';
 
 class SignUp extends Component {
+  static async getInitialProps({ store, req }) {
+    //return store.getState();
+  }
+
   render() {
     const { errors, touched, isAuthenticated } = this.props;
     return (
@@ -89,7 +93,11 @@ const mapStateToProps = ({ auth }) => {
   };
 };
 
+const mapActionsToProps = {
+  setLoggedInUser: authActions.setLoggedInUser,
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapActionsToProps
 )(Home);

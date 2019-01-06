@@ -1,34 +1,25 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { todoActions } from '../../state/ducks/todos';
 import Todos from './todos';
-import { AuthService } from '../../helpers';
-
-const Auth = new AuthService();
 
 class About extends Component {
   static async getInitialProps({ store, req }) {
-    const state = store.getState();
-    console.log(state);
-    if (Auth.loggedIn(req)) {
-      const token = Auth.getToken(req);
-      const user = Auth.getUser(req);
-
-      await store.dispatch(
-        todoActions.fetchTodoList({ userId: user._id, accessToken: token })
-      );
-      return store.getState().todos;
-    }
-
-    // await store.dispatch(
-    //   todoActions.fetchTodoList(auth.user._id, auth.accessToken)
-    // );
+    console.log('h');
+    console.log(store);
+    const { auth } = store.getState();
+    await store.dispatch(
+      todoActions.fetchTodoList({
+        userId: auth.user._id,
+        accessToken: auth.accessToken,
+      })
+    );
     return store.getState().todos;
   }
 
   render() {
     const { todoList } = this.props;
-    console.log(todoList);
     return (
       <Fragment>
         <div>
@@ -49,4 +40,11 @@ class About extends Component {
   }
 }
 
-export default About;
+const mapStateToProps = ({ auth }) => {
+  return {
+    accessToken: auth.accessToken,
+    user: auth.user,
+  };
+};
+
+export default connect(mapStateToProps)(About);

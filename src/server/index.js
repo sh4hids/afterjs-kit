@@ -4,12 +4,14 @@ import express from 'express';
 import { render } from '@jaredpalmer/after';
 import { renderToString } from 'react-dom/server';
 import { Home } from '../app/views/pages';
+import { AuthService } from '../app/helpers';
 import routes from '../app/routes';
 import MyDocument from './Document';
 import { Provider } from 'react-redux';
 import configureStore from '../app/state/store';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
+const Auth = new AuthService();
 
 const server = express();
 server
@@ -21,10 +23,18 @@ server
       const params = qs.parse(req.query);
 
       // Compile initial state
-      const preloadedState = {};
-
-      // Create a new Redux store instance
-      const store = configureStore(preloadedState);
+      let store;
+      if (Auth.loggedIn(req)) {
+        const accessToken = Auth.getToken(req);
+        const user = Auth.getUser(req);
+        const preloadedState = {
+          auth: { accessToken, user, isAuthenticated: true },
+        };
+        store = configureStore(preloadedState);
+      } else {
+        const preloadedState = {};
+        store = configureStore(preloadedState);
+      }
 
       // Grab the initial state from our Redux store
       const serverState = store.getState();
