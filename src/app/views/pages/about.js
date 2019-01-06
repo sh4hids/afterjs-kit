@@ -2,12 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { todoActions } from '../../state/ducks/todos';
+import { authActions } from '../../state/ducks/auth';
 import Todos from './todos';
 
 class About extends Component {
   static async getInitialProps({ store, req }) {
-    console.log('h');
-    console.log(store);
     const { auth } = store.getState();
     await store.dispatch(
       todoActions.fetchTodoList({
@@ -18,6 +17,16 @@ class About extends Component {
     return store.getState().todos;
   }
 
+  componentDidMount() {
+    const { accessToken, user, fetchTodoList } = this.props;
+    fetchTodoList({ accessToken, userId: user._id });
+  }
+
+  handleLogout = () => {
+    const { logOut, accessToken } = this.props;
+    logOut(accessToken);
+  };
+
   render() {
     const { todoList } = this.props;
     return (
@@ -26,6 +35,9 @@ class About extends Component {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/todos">About</NavLink>
+          <a href="" onClick={this.handleLogout}>
+            Logout
+          </a>
         </div>
         <h1>This is the about page</h1>
         <p>
@@ -40,11 +52,19 @@ class About extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStatesToProps = ({ auth, todos }) => {
   return {
-    accessToken: auth.accessToken,
-    user: auth.user,
+    ...auth,
+    ...todos,
   };
 };
 
-export default connect(mapStateToProps)(About);
+const mapActionsToProps = {
+  fetchTodoList: todoActions.fetchTodoList,
+  logOut: authActions.logout,
+};
+
+export default connect(
+  mapStatesToProps,
+  mapActionsToProps
+)(About);

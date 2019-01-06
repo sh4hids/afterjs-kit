@@ -42,11 +42,10 @@ export default class AuthService {
     return localStorage.getItem('accessToken');
   };
 
-  removeToken = req => {
-    if (req) {
-      jsCookie.remove('accessToken');
-      jsCookie.remove('user');
-    }
+  removeToken = () => {
+    console.log('Hello..');
+    jsCookie.remove('accessToken');
+    jsCookie.remove('user');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('user');
   };

@@ -80,21 +80,20 @@ const Home = withFormik({
       .required(),
   }),
   handleSubmit(values, { props }) {
-    const { dispatch } = props;
-    dispatch(authActions.login(values));
+    const { logIn } = props;
+    logIn(values);
   },
 })(SignUp);
 
 const mapStateToProps = ({ auth }) => {
   return {
-    isAuthenticated: auth.isAuthenticated,
-    user: auth.user,
-    accessToken: auth.accessToken,
+    ...auth,
   };
 };
 
 const mapActionsToProps = {
   setLoggedInUser: authActions.setLoggedInUser,
+  logIn: authActions.login,
 };
 
 export default connect(
