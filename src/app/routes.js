@@ -14,10 +14,12 @@ export default [
   {
     path: '/about',
     exact: true,
-    component: asyncComponent({
-      loader: () => import('./views/pages/about'), // required
-      Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
-    }),
+    component: withAuthentication(
+      asyncComponent({
+        loader: () => import('./views/pages/about'), // required
+        Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
+      })
+    ),
   },
   {
     path: '/todos',

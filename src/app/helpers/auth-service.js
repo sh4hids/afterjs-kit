@@ -43,7 +43,6 @@ export default class AuthService {
   };
 
   removeToken = () => {
-    console.log('Hello..');
     jsCookie.remove('accessToken');
     jsCookie.remove('user');
     localStorage.removeItem('accessToken');

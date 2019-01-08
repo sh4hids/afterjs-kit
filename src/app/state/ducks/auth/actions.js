@@ -12,7 +12,6 @@ export const login = ({ email, password }) => ({
 });
 
 export const logout = accessToken => {
-  console.log(accessToken);
   return {
     type: types.LOGOUT,
     meta: {

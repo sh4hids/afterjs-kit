@@ -22,9 +22,9 @@ class About extends Component {
     fetchTodoList({ accessToken, userId: user._id });
   }
 
-  handleLogout = () => {
+  handleLogout = async () => {
     const { logOut, accessToken } = this.props;
-    logOut(accessToken);
+    await logOut(accessToken);
   };
 
   render() {
@@ -35,9 +35,7 @@ class About extends Component {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/todos">About</NavLink>
-          <a href="" onClick={this.handleLogout}>
-            Logout
-          </a>
+          <button onClick={this.handleLogout}>Logout</button>
         </div>
         <h1>This is the about page</h1>
         <p>

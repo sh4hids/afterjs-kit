@@ -15,11 +15,17 @@ class SignUp extends Component {
   }
 
   render() {
-    const { errors, touched, isAuthenticated } = this.props;
+    const {
+      errors,
+      touched,
+      isAuthenticated,
+      redirectAfterLogin,
+      errorMessage,
+    } = this.props;
     return (
       <Fragment>
         {isAuthenticated ? (
-          <Redirect to="/about" />
+          <Redirect to={redirectAfterLogin || '/about'} />
         ) : (
           <Fragment>
             <Helmet>
@@ -51,7 +57,7 @@ class SignUp extends Component {
                     placeholder="Password"
                   />
                 </div>
-                <br />
+                <Text>{errorMessage}</Text>
                 <Button p={16} type="submit">
                   Log in
                 </Button>

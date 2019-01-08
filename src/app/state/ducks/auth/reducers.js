@@ -5,7 +5,8 @@ const initialState = {
   accessToken: '',
   user: {},
   errorMessage: '',
-  redirectAfterLogin: '/todos',
+  redirectAfterLogin: '/home',
+  redirectAfterLogout: '/',
 };
 
 const authReducers = function(state = initialState, { type, payload }) {
@@ -23,6 +24,7 @@ const authReducers = function(state = initialState, { type, payload }) {
         isAuthenticated: true,
         user: payload.user,
         accessToken: payload.token,
+        redirectAfterLogin: '/about',
       };
     case types.LOGIN_FAILED:
       return {
@@ -30,8 +32,15 @@ const authReducers = function(state = initialState, { type, payload }) {
         isAuthenticated: false,
         errorMessage: payload.message,
       };
-    case types.LOGOUT:
-      return { ...state, isAuthenticated: false, user: {} };
+    case types.LOGOUT_COMPLETED || types.LOGOUT_FAILED:
+      console.log(payload);
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: {},
+        accessToken: '',
+        redirectAfterLogout: '/',
+      };
     default:
       return state;
   }
