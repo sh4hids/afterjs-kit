@@ -1,14 +1,15 @@
-# After.js Kit with Redux and Styled Components
+# After.js Kit
 
 Baked inside is Redux with Styled-Components.
 
 ## Features
 
-- Atomic Design for folder structure
+- Atomic Design for views folder structure
 - Ducks pattern for Redux
 - Formik to handle form without tears
 - Yum for json schema validation
 - Isomorphic fetch to handle Ajax request
+- Auth middleware for public and private route
 
 ## How to use
 
