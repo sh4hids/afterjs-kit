@@ -1,5 +1,5 @@
 # After.js Kit
-![](https://img.shields.io/github/license/sh4hids/afterjs-kit.svg) · ![](https://img.shields.io/github/issues/sh4hids/afterjs-kit.svg) · ![](https://img.shields.io/github/stars/sh4hids/afterjs-kit.svg) · ![](https://img.shields.io/github/forks/sh4hids/afterjs-kit.svg)
+![](https://img.shields.io/github/license/sh4hids/afterjs-kit.svg) &middot; ![](https://img.shields.io/github/issues/sh4hids/afterjs-kit.svg) &middot; ![](https://img.shields.io/github/stars/sh4hids/afterjs-kit.svg) &middot; ![](https://img.shields.io/github/forks/sh4hids/afterjs-kit.svg)
 
 Baked inside is Redux with Styled-Components.
 
