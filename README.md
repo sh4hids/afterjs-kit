@@ -10,6 +10,7 @@ Baked inside is Redux with Styled-Components.
 - Yum for json schema validation
 - Isomorphic fetch to handle Ajax request
 - Auth middleware for public and private route
+- JWT for authentication
 
 ## How to use
 
