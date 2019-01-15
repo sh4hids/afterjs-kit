@@ -14,7 +14,6 @@ const apiService = () => next => action => {
   }
 
   const { path, method = 'GET', body, accessToken } = action.meta;
-  console.log(accessToken);
   if (!path) {
     throw new Error(`'path' not specified for async action ${action.type}`);
   }
@@ -50,7 +49,6 @@ function handleResponse(res, action, next) {
   } else if (action.type === 'auth/logout') {
     Auth.removeToken();
   }
-  console.log(action.type);
   next({
     type: `${action.type}_completed`,
     payload: res.data,

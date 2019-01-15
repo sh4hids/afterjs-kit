@@ -33,7 +33,6 @@ const authReducers = function(state = initialState, { type, payload }) {
         errorMessage: payload.message,
       };
     case types.LOGOUT_COMPLETED || types.LOGOUT_FAILED:
-      console.log(payload);
       return {
         ...state,
         isAuthenticated: false,

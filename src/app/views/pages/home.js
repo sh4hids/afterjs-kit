@@ -18,6 +18,7 @@ class SignUp extends Component {
     const {
       errors,
       touched,
+      isSubmitting,
       isAuthenticated,
       redirectAfterLogin,
       errorMessage,
@@ -58,7 +59,7 @@ class SignUp extends Component {
                   />
                 </div>
                 <Text>{errorMessage}</Text>
-                <Button p={16} type="submit">
+                <Button p={16} type="submit" disabled={isSubmitting}>
                   Log in
                 </Button>
               </Form>
@@ -85,9 +86,14 @@ const Home = withFormik({
       .min(6)
       .required(),
   }),
-  handleSubmit(values, { props }) {
-    const { logIn } = props;
-    logIn(values);
+  async handleSubmit(values, { props, setError, resetForm, setSubmitting }) {
+    try {
+      const { logIn } = props;
+      await logIn(values);
+      console.log('Hello');
+      resetForm();
+    } catch (err) {}
+    setSubmitting();
   },
 })(SignUp);
 
